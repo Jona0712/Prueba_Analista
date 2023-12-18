@@ -9,4 +9,5 @@ public interface iCuentaRepository {
     public int save(Cuenta cuenta);
     public int update(Cuenta cuenta);
     public int deleteBy(int id);
+
 }

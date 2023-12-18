@@ -39,4 +39,6 @@ public class CuentaRepository implements iCuentaRepository{
         String sql = "UPDATE Cuenta set Id_EstadoCuenta=3 WHERE Id_Cuenta=? ";
         return jdbcTemplate.update(sql, new Object[]{id});
     }
+
+
 }

@@ -57,5 +57,15 @@ public class CuentaController {
 
         return new ResponseEntity<>(serviceResponsive, HttpStatus.OK);
     }
+    @GetMapping("/estado/{id}")
+    public ResponseEntity<ServiceResponsive> delete(@PathVariable int id){
+        ServiceResponsive   serviceResponsive = new ServiceResponsive();
+        String result = iCuentaService.estado(id);
+        if(result != "" ){
+            serviceResponsive.setMessage("Cuenta Eliminada Exitosamente");
+        }
+
+        return new ResponseEntity<>(serviceResponsive, HttpStatus.OK);
+    }
 
 }
