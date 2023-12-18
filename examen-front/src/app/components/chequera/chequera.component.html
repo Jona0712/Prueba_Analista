@@ -1,0 +1,35 @@
+
+<nav   class="navbar" style="background-color: #4e73df;">
+    <div class="container-fluid">
+      
+      <div class="col-md-8">
+          <h1 style="color: white;">Chequera</h1>
+        </div>
+        
+    </div> 
+</nav>
+<div  class="col-md-12 p-2">
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalCuenta"><i class="fa fa-save"></i> Nueva Chequera</button>
+    <p>{{this.cuenta}}</p>
+    <table class="table mt-2 table-bordered">
+        <thead class="table-primary">
+          <tr>
+            <th>ID</th>
+            <th>Cantidad de Cheques</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listCliente">
+            <td>{{item.id_Chequera}}</td>
+            <td>{{item.cantidad_cheque}}</td>
+            <td> 
+                &nbsp; 
+                <button type="button" class="btn btn-primary btn-sm" >
+                    Ver Cheques
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>

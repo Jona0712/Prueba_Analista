@@ -1,0 +1,120 @@
+<!-- <nav class="navbar bg-light"> -->
+    <nav class="navbar" style="background-color: #4e73df;">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">
+            <img style="border-radius: 10px;" src="https://elviajedelcliente.com/wp-content/uploads/2021/10/CLIENTES.png" alt="Logo" width="380" height="180" >
+          </a>
+          <div class="col-md-8">
+              <h1 style="color: white;">Clientes</h1>
+            </div>
+            
+        </div> 
+    </nav>
+    
+    <div class="col-md-12 p-2">
+        <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-save"></i> Nuevo Cliente</button>
+        <table class="table mt-2 table-bordered">
+            <thead class="table-primary">
+              <tr>
+                <th>ID</th>
+                <th>Nombre</th>
+                <th>Apellido</th>
+                <th>Numero Identificacion</th>
+                <th>Fecha Naciemiento</th>
+                <th>Direccion</th>
+                <th>Correo</th>
+                <th>Telefono</th>
+                <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of listCliente">
+                <td>{{item.id_cliente}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.apellido}}</td>
+                <td>{{item.numero_identificacion}}</td>
+                <td>{{item.fecha_nacimiento}}</td>
+                <td>{{item.direccion}}</td>
+                <td>{{item.correo_electronico}}</td>
+                <td>{{item.telefono}}</td>
+                <td>
+                    <button type="button" class="btn btn-warning btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="selectItem(item)">
+                        <i class="fa fa-pencil"></i>
+                    </button> 
+                    &nbsp;
+                    <button type="button" class="btn btn-danger btn-sm" (click)="delete(item.id_cliente)">
+                        <i class="fa fa-trash"></i>
+                    </button> 
+                    &nbsp;
+                    <button type="button" class="btn btn-primary btn-sm" (click)="mostrarCuenta(item.id_cliente)">
+                        Ver Cuentas
+                    </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+    </div>
+    
+    <!-- TODO: Modals -->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 *ngIf="!isUpdate"  class="modal-title fs-5">Nuevo Cliente</h1>
+              <h1 *ngIf="isUpdate"  class="modal-title fs-5">Actualizar Cliente</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="newCard()" ></button>
+            </div>
+            <div class="modal-body">
+                <form [formGroup]="formCliente">
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Nombre</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="nombre">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Apellido</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="apellido">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Numero Identificacion</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="numero_identificacion">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Fecha Nacimiento</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="fecha_nacimiento">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Direccion</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="direccion">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Correo</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="correo_electronico">
+                        </div>
+                    </div>
+                    <div class="mb-3 row">
+                        <label class="col-sm-2 col-form-label">Telefono</label>
+                        <div class="col-sm-10">
+                          <input type="text" class="form-control" formControlName="telefono">
+                        </div>
+                    </div>
+                  </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+              <button *ngIf="!isUpdate"  type="button" class="btn btn-success btn-sm" (click)="save()">Guardar</button>
+              <button *ngIf="isUpdate"   type="button" class="btn btn-warning btn-sm" (click)="update()">Actualizar</button>
+            </div>
+          </div>
+        </div>
+      </div>

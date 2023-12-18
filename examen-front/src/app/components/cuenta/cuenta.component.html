@@ -1,0 +1,103 @@
+
+<nav *ngIf="isCuenta"  class="navbar" style="background-color: #4e73df;">
+    <div class="container-fluid">
+      
+      <div class="col-md-8">
+          <h1 style="color: white;">Cuentas</h1>
+        </div>
+        
+    </div> 
+</nav>
+<div *ngIf="isCuenta" class="col-md-12 p-2">
+    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#modalCuenta"><i class="fa fa-save"></i> Nueva Cuenta</button>
+    <p>{{this.cliente}}</p>
+    <table class="table mt-2 table-bordered">
+        <thead class="table-primary">
+          <tr>
+            <th>ID</th>
+            <th>Tipo Cuenta</th>
+            <th>Monto</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of listCliente">
+            <td>{{item.id_Cuenta}}</td>
+            <td>{{item.tipo_Cuenta}}</td>
+            <td>{{item.monto}}</td>
+            <td>
+                <button type="button" class="btn btn-warning btn-sm"  data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="selectItem(item)">
+                    <i class="fa fa-pencil"></i>
+                </button> 
+                &nbsp; 
+                <button type="button" class="btn btn-primary btn-sm" >
+                    Ver Chequeras
+                </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</div>
+<!-- TODO: Modals -->
+<div class="modal fade" id="modalCuenta" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 *ngIf="!isUpdate"  class="modal-title fs-5">Nueva Cuenta</h1>
+          <h1 *ngIf="isUpdate"  class="modal-title fs-5">Actualizar Cuenta</h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="newCard()" ></button>
+        </div>
+        <div class="modal-body">
+            <!--<form [formGroup]="formCuenta">
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Nombre</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="nombre">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Apellido</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="apellido">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Numero Identificacion</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="numero_identificacion">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Fecha Nacimiento</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="fecha_nacimiento">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Direccion</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="direccion">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Correo</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="correo_electronico">
+                    </div>
+                </div>
+                <div class="mb-3 row">
+                    <label class="col-sm-2 col-form-label">Telefono</label>
+                    <div class="col-sm-10">
+                      <input type="text" class="form-control" formControlName="telefono">
+                    </div>
+                </div>
+              </form>-->
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+          <button *ngIf="!isUpdate"  type="button" class="btn btn-success btn-sm" (click)="save()">Guardar</button>
+          <button *ngIf="isUpdate"   type="button" class="btn btn-warning btn-sm" (click)="update()">Actualizar</button>
+        </div>
+      </div>
+    </div>
+  </div>
