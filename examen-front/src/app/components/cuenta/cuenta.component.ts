@@ -17,7 +17,8 @@ export class CuentaComponent implements OnInit {
   isUpdate: boolean = false;
   isCuenta: boolean = true;
   cliente: number = 0;
-
+  elementos = ['Ahorro', 'Monetaria'];
+  seleccion: string ='';
   private subscription: Subscription;
 
 
@@ -83,6 +84,18 @@ export class CuentaComponent implements OnInit {
     this.formCuenta.controls['id_Cuenta'].setValue(item.id_Cuenta);
     this.formCuenta.controls['tipo_Cuenta'].setValue(item.tipo_Cuenta);
     this.formCuenta.controls['monto'].setValue(item.monto);
+    
+  }
+
+  mostrarChequera(id: any){
+    this.isCuenta = true;
+    this.datoCompartidoService.setCuenta(id);
+    this.cuentaService.mostrarChequera(id).subscribe(resp=>{
+      if(resp){
+        this.list(id);
+      }
+    });
+    this.datoCompartidoService.actualizarComponenteA();
     
   }
   

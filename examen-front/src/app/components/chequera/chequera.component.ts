@@ -15,7 +15,7 @@ export class ChequeraComponent {
 
   
   listCliente: ChequeraModel [] = [];
-  formCuenta: FormGroup = new FormGroup({});
+  formChequera: FormGroup = new FormGroup({});
   isUpdate: boolean = false;
   isCuenta: boolean = true;
   
@@ -26,7 +26,7 @@ export class ChequeraComponent {
   constructor(private chequeraService: ChequeraService, private datoCompartidoService: DatoCompartidoService) {
     this.subscription = this.datoCompartidoService.actualizarComponenteAObservable$.subscribe(() => {
       // Lógica para actualizar ComponenteA
-      console.log('Componente A actualizado');
+      console.log('Componente Chequera actualizado');
       this.cuenta = this.datoCompartidoService.getCuenta();
       this.list(this.cuenta);
     });
@@ -35,7 +35,7 @@ export class ChequeraComponent {
   ngOnInit(): void {
     this.cuenta = this.datoCompartidoService.getCuenta();
     this.list(this.cuenta);
-    this.formCuenta =  new FormGroup({
+    this.formChequera =  new FormGroup({
       id_chequera : new FormControl(''),
       cantidad_cheque: new FormControl(''),
       id_Estado: new FormControl(''),
@@ -43,8 +43,8 @@ export class ChequeraComponent {
   }
 
   list(id: any){
-    id = this.cliente;
-    this.cuentaService.getCuenta(id).subscribe(resp=>{
+    id = this.cuenta;
+    this.chequeraService.getCuenta(id).subscribe(resp=>{
       if(resp){
         this.listCliente = resp;
       }
@@ -52,21 +52,21 @@ export class ChequeraComponent {
   }
 
   save(){
-    this.formCuenta.controls['id_EstadoCuenta'].setValue('1');
-    this.cuentaService.saveCuenta(this.formCuenta.value).subscribe(resp=>{
+    this.formChequera.controls['id_Estado'].setValue('1');
+    this.chequeraService.saveChequera(this.formChequera.value).subscribe(resp=>{
       if(resp){
-        this.list(this.cliente);
-        this.formCuenta.reset();
+        this.list(this.cuenta );
+        this.formChequera.reset();
       }
     });
   }
 
   update(){
-    this.formCuenta.controls['id_EstadoCuenta'].setValue('1');
-    this.cuentaService.updateCuenta(this.formCuenta.value).subscribe(resp=>{
+    this.formChequera.controls['id_EstadoCuenta'].setValue('1');
+    this.chequeraService.updateChequera(this.formChequera.value).subscribe(resp=>{
       if(resp){
-        this.list(this.cliente);
-        this.formCuenta.reset();
+        this.list(this.cuenta);
+        this.formChequera.reset();
       }
     });
   }
@@ -75,14 +75,13 @@ export class ChequeraComponent {
 
   newCard(){
     this.isUpdate = false;
-    this.formCuenta.reset();
+    this.formChequera.reset();
   }
 
   selectItem(item: any){
     this.isUpdate = true;
-    this.formCuenta.controls['id_Cuenta'].setValue(item.id_Cuenta);
-    this.formCuenta.controls['tipo_Cuenta'].setValue(item.tipo_Cuenta);
-    this.formCuenta.controls['monto'].setValue(item.monto);
+    this.formChequera.controls['id_Chequera'].setValue(item.id_chequera);
+    this.formChequera.controls['cantidad_cheque'].setValue(item.cantidad_cheque);
     
   }
 }

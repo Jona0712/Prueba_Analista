@@ -22,4 +22,8 @@ export class CuentaService {
     return this.httpClient.post<any>(this.URL_API + 'update', request).pipe(map(resp => resp));
   }
 
+  mostrarChequera(id: number): Observable<any> {
+    return this.httpClient.get<any>(environment.apiChequera + 'list/' + id).pipe(map(resp => resp));
+  }
+
 }
